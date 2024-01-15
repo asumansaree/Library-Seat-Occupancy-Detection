@@ -1,71 +1,26 @@
 from google.colab import drive
 drive.mount ("/content/drive")
 
+!git clone https://github.com/asumansaree/Library-Seat-Occupancy-Detection.git
 
-
-
-!git clone https://github.com/RizwanMunawar/yolov7-object-tracking.git
-
-
-
-
-
-%cd "yolov7-object-tracking"
-
-
-
-
-
+%cd "Library-Seat-Occupancy-Detection"
 
 !pip install -r requirements.txt
 
-
-
-
-
-
-
-
-with open("/content/custom_detect_and_track.py", 'r') as file:
-    modified_code = file.read()
-
-# Save the modified code back to the 'detect_and_track.py' file
-with open("/content/yolov7-object-tracking/detect_and_track.py", 'w') as file:
-    file.write(modified_code)
-
-print("Code saved back to detect_and_track.py.")
-
-with open("/content/custom_sort.py", 'r') as file:
-    modified_code2 = file.read()
-
-# Save the modified code back to the 'detect_and_track.py' file
-with open("/content/yolov7-object-tracking/sort.py", 'w') as file:
-    file.write(modified_code2)
-
-print("Code saved back to sort.py.")
-
-
-
-
-
-
-
-
 # seatOccupancyDetectionMiniTrainVideo
+# This cell runs approximately in 30-40 seconds for 21 second video: seatOccupancyDetectionMiniTrainVideo.mp4
 !python detect_and_track.py \
 --weights yolov7.pt \
 --source "/content/drive/MyDrive/ImageProcessing/seatOccupancyDetectionMiniTrainVideo.mp4" \
 --conf-thres 0.4 \
 --classes 0 56 \
---name "YOLOV7_Object_Tracking"
+--name "YOLOV7_Library_Seat_Detection"
 
 
-
-
-
-
-
-path = "/content/yolov7-object-tracking/runs/detect/YOLOV7_Object_Tracking16/"
+# The generated mp4 format is not as we want, we couldn't directly open it.
+# So I apply a conversion, so that it can be both display in Colab and can be watch via download
+# This conversion takes approximately 15 seconds for 21 second video: seatOccupancyDetectionMiniTrainVideo.mp4
+path = "/content/Library-Seat-Occupancy-Detection/runs/detect/YOLOV7_Library_Seat_Detection/"
 !ffmpeg -i {path + "seatOccupancyDetectionMiniTrainVideo.mp4"} -vcodec libx264 {path + "display.mp4"}
 from IPython.display import HTML
 from base64 import b64encode
@@ -76,8 +31,6 @@ HTML("""
       <source src="%s" type="video/mp4">
 </video>
 """ % data_url)
-
-
 
 
 
