@@ -48,6 +48,7 @@ Development Environment is Google Colab. Here is the ready-to use Colab Notebook
     """ % data_url)
 
 # Sample Output
+Output file will be created in the "/content/Library-Seat-Occupancy-Detection/runs/detect/YOLOV7_Library_Seat_Detection/{video.mp4}"
 Output is in the mp4 format. For demonstration purposes in pdf document, it is included as image
 <p align="center">
   <img src="https://github.com/asumansaree/Library-Seat-Occupancy-Detection/assets/58108789/058ee40d-9ef1-4c79-9c18-0fb316e30e46" alt="ImageProcessing_ProjectReport_AsumanSareERGUT-09" width="500" style="display: block; margin: 0 auto;"/>
@@ -56,3 +57,11 @@ Output is in the mp4 format. For demonstration purposes in pdf document, it is i
 # Contact
 Contact me for any problem and question
 asumansaree@gmail.com
+
+# References
+* https://github.com/RizwanMunawar/yolov7-object-tracking
+* Anish Aralikatti et al 2020 J. Phys.: Conf. Ser. 1706 012149
+* Redmon J, Divvala S, Girshick R and Farhadi A You Only Look Once: Unified, Real-Time Object 
+  Detection 2016IEEE Conference on Computer Vision and Pattern Recognition (Las Vegas) pp 779-788 
+* COCO 2017 dataset: http://cocodataset.org
+
