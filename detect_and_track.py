@@ -81,12 +81,20 @@ def draw_boxes(img, bbox, identities=None, categories=None, names=None, save_wit
         elif person_moved == 1 and cat == 56:
             for chair_coord, _ in global_identities.items():
                 duration = time.time() - start_time
-                label = f"Occupied for {duration:.2f} seconds"
-                (w, h), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 1)
-                cv2.rectangle(img, (chair_coord[0], chair_coord[1]), (chair_coord[2], chair_coord[3]), (0, 0, 255), 2)  # Red rectangle
-                cv2.rectangle(img, (chair_coord[0], chair_coord[1] - 20), (chair_coord[0] + w, chair_coord[1]), (0, 0, 255), -1)  # Red rectangle for label background
-                cv2.putText(img, label, (chair_coord[0], chair_coord[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 
-                            0.6, (0, 0, 0), 1)  
+                # add optional max limit time
+                if duration < 10:
+                    label = f"Occupied for {duration:.2f} seconds"
+                    (w, h), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 1)
+                    cv2.rectangle(img, (chair_coord[0], chair_coord[1]), (chair_coord[2], chair_coord[3]), (0, 0, 255), 2)  # Red rectangle
+                    cv2.rectangle(img, (chair_coord[0], chair_coord[1] - 20), (chair_coord[0] + w, chair_coord[1]), (0, 0, 255), -1)  # Red rectangle for label background
+                    cv2.putText(img, label, (chair_coord[0], chair_coord[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 
+                                0.6, (0, 0, 0), 1)  # Black label text
+                else:
+                    label = f"Occupied for {duration:.2f} seconds - TIME EXCEEDED"
+                    (w, h), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 1)
+                    cv2.rectangle(img, (chair_coord[0], chair_coord[1]), (chair_coord[2], chair_coord[3]), (0, 0, 255), -1)  # Fully red rectangle
+                    cv2.putText(img, label, (chair_coord[0], chair_coord[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 
+                                0.6, (0, 0, 0), 1)  # Black label text
     return img
 #..............................................................................
 
